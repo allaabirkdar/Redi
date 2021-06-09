@@ -158,7 +158,10 @@ async function getRecipes() {
         console.log("--------------------------------");
     }
 }
-getRecipes();
+console.log("Hello Allaa how are you?");
+
+
+getRecipes() // Hello again;
 async function fetchapiRecipes(recipeId) {
     // let response = await fetch("https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey="+ key);
     //let result = await response.json();
