@@ -51,10 +51,10 @@ let key = "d8634019d71d442f8f51f0cfbb930324";
   fetchapiRecipes();
 */
 async function getRecipes() {
-    /** 
-     * This url lets us search for recipes based on a keyword that we specify 
+    /**
+     * This url lets us search for recipes based on a keyword that we specify
      * in the &query parameter
-     * 
+     *
      * Right now we are searching for recipes with "chicken", later we'll get the keyword from an input
     */
     let url = "https://api.spoonacular.com/recipes/complexSearch";
@@ -64,7 +64,7 @@ async function getRecipes() {
     url += "&diet=ketogenic";
     // this is the main query to get a list of recipes
     //let response = await fetch(url);
-    /* result contains the full result from the api. The recipes are inside 
+    /* result contains the full result from the api. The recipes are inside
         the property results. So, to get to them we have to use result.results
     */
     // let result = await response.json();
@@ -132,16 +132,16 @@ async function getRecipes() {
 
         /**
          *  We call the function fetchapiRecipes() passing to it the id of a recipe
-         * 
+         *
          * Inside that function we fetch the specific information for a recipe
-         * 
+         *
          * Recipe will now contain all the data of a recipe, including ingredients
          */
         let Recipe = await fetchapiRecipes(result.results[i].id);
         // console.log("Recipe", Recipe);
         // console.log("Recipe extendedIngredients", Recipe.extendedIngredients);
         // We need to get extra info for each ingredient
-        // To do that, we need to loop through the array of ingredients (Recipe.extendedIngredients) 
+        // To do that, we need to loop through the array of ingredients (Recipe.extendedIngredients)
         // Inside the loop, start by printing the id of each ingredient
         // Once you have the id, pass this id to the function ingredients()
         /*let ingredient = await ingredients();*/
@@ -525,9 +525,10 @@ async function fetchapiRecipes(recipeId) {
         // console.log('extendedIngredient ', result.extendedIngredients[i]);
         let ingredient = await ingredients(result.extendedIngredients[i].id) // => {...many information about the ingredients}
         console.log('ingredient', ingredient)
-        
+
         let recipeElement = document.createElement("div");
-        recipeElement.textContent=(ingredient.nutrition)
+        let nutrition = ingredient.nutrition.nutrients[0]
+        recipeElement.textContent=(ingredient.name + " " + nutrition.amount + " " + nutrition.unit)
         document.body.appendChild(recipeElement);
 
     }
